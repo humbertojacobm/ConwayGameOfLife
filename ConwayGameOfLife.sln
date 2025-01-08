@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConwayGameOfLife.DatabaseMo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConwayGameOfLife.DTO", "ConwayGameOfLife.DTO\ConwayGameOfLife.DTO.csproj", "{364E6401-E64F-44D4-B8D3-AB12BC0783EF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConwayGameOfLife.Core", "ConwayGameOfLife.Core\ConwayGameOfLife.Core.csproj", "{6D47F648-B8B6-4242-8D44-8810E34B88DF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{364E6401-E64F-44D4-B8D3-AB12BC0783EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{364E6401-E64F-44D4-B8D3-AB12BC0783EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{364E6401-E64F-44D4-B8D3-AB12BC0783EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D47F648-B8B6-4242-8D44-8810E34B88DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D47F648-B8B6-4242-8D44-8810E34B88DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D47F648-B8B6-4242-8D44-8810E34B88DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D47F648-B8B6-4242-8D44-8810E34B88DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

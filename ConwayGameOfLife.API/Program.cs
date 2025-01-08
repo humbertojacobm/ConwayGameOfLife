@@ -1,4 +1,5 @@
 
+using ConwayGameOfLife.Core;
 using ConwayGameOfLife.Infrastructure.Mapping;
 using ConwayGameOfLife.Infrastructure.Repository;
 
@@ -17,6 +18,7 @@ namespace ConwayGameOfLife.API
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddScoped<IGameOfLifeService, GameOfLifeService>();
             builder.Services.AddScoped<IBoardStateRepository, BoardStateRepository>();
 
             builder.Services.AddAutoMapper(typeof(BoardMappingProfile));
