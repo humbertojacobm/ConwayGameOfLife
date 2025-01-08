@@ -2,6 +2,9 @@
 using ConwayGameOfLife.Core;
 using ConwayGameOfLife.Infrastructure.Mapping;
 using ConwayGameOfLife.Infrastructure.Repository;
+using ConwayGameOfLife.Infrastructure.Validators;
+using FluentValidation.AspNetCore;
+using FluentValidation;
 
 namespace ConwayGameOfLife.API
 {
@@ -14,6 +17,8 @@ namespace ConwayGameOfLife.API
             // Add services to the container.
 
             builder.Services.AddControllers();
+            builder.Services.AddFluentValidationAutoValidation();
+            builder.Services.AddValidatorsFromAssemblyContaining<BoardDtoValidator>();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
