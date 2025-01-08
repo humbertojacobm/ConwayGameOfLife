@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConwayGameOfLife.API", "Con
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConwayGameOfLife.Infrastructure", "ConwayGameOfLife.Infrastructure\ConwayGameOfLife.Infrastructure.csproj", "{C37978FD-52E6-478C-9BDD-27517F318C56}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConwayGameOfLife.DatabaseModels", "ConwayGameOfLife.DatabaseModels\ConwayGameOfLife.DatabaseModels.csproj", "{21A8BBFC-4C31-4E8F-8C97-10B5EE20B01D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConwayGameOfLife.DTO", "ConwayGameOfLife.DTO\ConwayGameOfLife.DTO.csproj", "{364E6401-E64F-44D4-B8D3-AB12BC0783EF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{C37978FD-52E6-478C-9BDD-27517F318C56}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C37978FD-52E6-478C-9BDD-27517F318C56}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C37978FD-52E6-478C-9BDD-27517F318C56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21A8BBFC-4C31-4E8F-8C97-10B5EE20B01D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21A8BBFC-4C31-4E8F-8C97-10B5EE20B01D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21A8BBFC-4C31-4E8F-8C97-10B5EE20B01D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21A8BBFC-4C31-4E8F-8C97-10B5EE20B01D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{364E6401-E64F-44D4-B8D3-AB12BC0783EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{364E6401-E64F-44D4-B8D3-AB12BC0783EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{364E6401-E64F-44D4-B8D3-AB12BC0783EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{364E6401-E64F-44D4-B8D3-AB12BC0783EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

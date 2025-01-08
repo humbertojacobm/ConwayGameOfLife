@@ -6,8 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\ConwayGameOfLife.DatabaseModels\ConwayGameOfLife.DatabaseModels.csproj" />
-  </ItemGroup>
-
 </Project>
