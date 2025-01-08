@@ -1,4 +1,7 @@
 
+using ConwayGameOfLife.Infrastructure.Mapping;
+using ConwayGameOfLife.Infrastructure.Repository;
+
 namespace ConwayGameOfLife.API
 {
     public class Program
@@ -13,6 +16,10 @@ namespace ConwayGameOfLife.API
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddScoped<IBoardStateRepository, BoardStateRepository>();
+
+            builder.Services.AddAutoMapper(typeof(BoardMappingProfile));
 
             var app = builder.Build();
 

@@ -1,6 +1,6 @@
 ﻿namespace ConwayGameOfLife.DTO
 {
-    public class Board
+    public class BoardDTO
     {
         public Guid Id { get; set; }
         public int Width { get; set; }

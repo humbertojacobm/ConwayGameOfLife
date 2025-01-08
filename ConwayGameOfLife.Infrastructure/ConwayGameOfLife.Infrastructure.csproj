@@ -7,7 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ConwayGameOfLife.DatabaseModels\ConwayGameOfLife.DatabaseModels.csproj" />
+    <ProjectReference Include="..\ConwayGameOfLife.DTO\ConwayGameOfLife.DTO.csproj" />
   </ItemGroup>
 
 </Project>

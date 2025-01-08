@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConwayGameOfLife.Infrastructure
+namespace ConwayGameOfLife.Infrastructure.Repository
 {
     public class BoardStateRepository : IBoardStateRepository
     {
