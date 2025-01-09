@@ -43,11 +43,20 @@ namespace ConwayGameOfLife.Core
 
             var nextBoard = ApplyConwayRules(board);
 
-            board.Step++;
+            if (Helper.AreBoardsEqual(board, nextBoard))
+            {
+                nextBoard.Step = board.Step;
+            }
+            else
+            {
+                board.Cells = nextBoard.Cells;
 
-            nextBoard.Step = board.Step;
+                board.Step++;
 
-            _boardStateRepository.SaveBoard(board);
+                nextBoard.Step = board.Step;
+
+                _boardStateRepository.SaveBoard(board);
+            }
 
             return _mapper.Map<BoardDTO>(nextBoard);
         }
@@ -103,29 +112,34 @@ namespace ConwayGameOfLife.Core
                 $"Board does not reach a stable (final) state after {maxAttempts} attempts.");
         }
 
-        private Board ApplyConwayRules(Board board)
+        private Board ApplyConwayRules(Board currentBoard)
         {
-            if (board == null)
-                throw new ArgumentNullException(nameof(board));
+            if (currentBoard == null)
+                throw new ArgumentNullException(nameof(currentBoard));
 
-            var updatedCells = new bool[board.Height, board.Width];
-
-            for (int row = 0; row < board.Height; row++)
+            var nextBoard = new Board
             {
-                for (int col = 0; col < board.Width; col++)
-                {
-                    int livingNeighbors = CountLivingNeighbors(board, row, col);
-                    bool isAlive = board.Cells[row, col];
+                Id = currentBoard.Id,
+                Width = currentBoard.Width,
+                Height = currentBoard.Height,
+                Cells = new bool[currentBoard.Height, currentBoard.Width],
+                Step = currentBoard.Step
+            };
 
-                    updatedCells[row, col] = isAlive
-                        ? (livingNeighbors == 2 || livingNeighbors == 3)
-                        : (livingNeighbors == 3);
+            for (int row = 0; row < currentBoard.Height; row++)
+            {
+                for (int col = 0; col < currentBoard.Width; col++)
+                {
+                    int livingNeighbors = CountLivingNeighbors(currentBoard, row, col);
+                    bool isAlive = currentBoard.Cells[row, col];
+
+                    nextBoard.Cells[row, col] = isAlive
+                        ? (livingNeighbors == 2 || livingNeighbors == 3) // Survive
+                        : (livingNeighbors == 3);                        // Birth
                 }
             }
 
-            board.Cells = updatedCells;
-
-            return board;
+            return nextBoard;
         }
 
         private int CountLivingNeighbors(Board board, int row, int col)
