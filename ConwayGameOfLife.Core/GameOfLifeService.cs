@@ -48,16 +48,24 @@ namespace ConwayGameOfLife.Core
             return _mapper.Map<BoardDTO>(nextBoard);
         }
 
-        public BoardDTO GetXStepsState(Guid boardId, int steps)
+        public BoardDTO GetXStepsState(Guid boardId, int requestedStep)
         {
             var board = _boardStateRepository.GetBoard(boardId);
             if (board == null)
                 throw new ArgumentException("Board not found", nameof(boardId));
 
-            for (int i = 0; i < steps; i++)
+            if (requestedStep < board.Step)
+            {
+                throw new InvalidOperationException(
+                    $"Requested step {requestedStep} is less than the current step {board.Step}. Backward stepping is not allowed.");
+            }
+
+            int stepsToAdvance = requestedStep - board.Step;
+
+            for (int i = 0; i < stepsToAdvance; i++)
             {
                 board = ApplyConwayRules(board);
-                board.Step += 1;
+                board.Step++;
                 _boardStateRepository.SaveBoard(board);
             }
 

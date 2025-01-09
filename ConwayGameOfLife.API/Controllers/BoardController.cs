@@ -33,12 +33,22 @@ namespace ConwayGameOfLife.API.Controllers
         [HttpGet("{id}/steps/{x}")]
         public IActionResult GetXSteps(Guid id, int x)
         {
-            // Validate the input
             if (x < 0)
-                return BadRequest("Number of steps must be a non-negative integer.");
+                return BadRequest("Number of steps must be non-negative.");
 
-            var boardDto = _gameOfLifeService.GetXStepsState(id, x);
-            return Ok(boardDto);
+            try
+            {
+                var boardDto = _gameOfLifeService.GetXStepsState(id, x);
+                return Ok(boardDto);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (ArgumentException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
 
         //[HttpGet("{id}/final")]
