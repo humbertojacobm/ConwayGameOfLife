@@ -28,7 +28,6 @@ namespace ConwayGameOfLife.Core
             var board = _mapper.Map<Board>(boardDto);
             board.Id = Guid.NewGuid();
 
-            // Save to repository
             _boardStateRepository.SaveBoard(board);
             return board.Id;
         }
@@ -39,9 +38,10 @@ namespace ConwayGameOfLife.Core
             if (board == null)
                 throw new ArgumentException("Board not found", nameof(boardId));
 
-            var nextState = ApplyConwayRules(board);
-            _boardStateRepository.SaveBoard(nextState); // if you want to persist each step
-            return _mapper.Map<BoardDTO>(nextState);
+            var nextBoard = ApplyConwayRules(board);
+            _boardStateRepository.SaveBoard(nextBoard);
+
+            return _mapper.Map<BoardDTO>(nextBoard);
         }
 
         //public BoardDTO GetXStepsState(Guid boardId, int steps)
@@ -108,7 +108,5 @@ namespace ConwayGameOfLife.Core
 
             return count;
         }
-
     }
-
 }

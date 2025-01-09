@@ -26,7 +26,10 @@ namespace ConwayGameOfLife.API
             builder.Services.AddScoped<IGameOfLifeService, GameOfLifeService>();
             builder.Services.AddScoped<IBoardStateRepository, BoardStateRepository>();
 
-            builder.Services.AddAutoMapper(typeof(BoardMappingProfile));
+            builder.Services.AddAutoMapper(cfg =>
+            {
+                cfg.AddProfile<BoardMappingProfile>();
+            });
 
             var app = builder.Build();
 
