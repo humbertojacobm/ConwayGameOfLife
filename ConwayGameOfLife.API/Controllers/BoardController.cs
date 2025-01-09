@@ -30,12 +30,16 @@ namespace ConwayGameOfLife.API.Controllers
             return Ok(nextBoardState);
         }
 
-        //[HttpGet("{id}/steps/{x}")]
-        //public IActionResult GetXSteps(Guid id, int x)
-        //{
-        //    var boardState = _gameOfLifeService.GetXStepsState(id, x);
-        //    return Ok(boardState);
-        //}
+        [HttpGet("{id}/steps/{x}")]
+        public IActionResult GetXSteps(Guid id, int x)
+        {
+            // Validate the input
+            if (x < 0)
+                return BadRequest("Number of steps must be a non-negative integer.");
+
+            var boardDto = _gameOfLifeService.GetXStepsState(id, x);
+            return Ok(boardDto);
+        }
 
         //[HttpGet("{id}/final")]
         //public IActionResult GetFinalState(Guid id)

@@ -48,11 +48,21 @@ namespace ConwayGameOfLife.Core
             return _mapper.Map<BoardDTO>(nextBoard);
         }
 
-        //public BoardDTO GetXStepsState(Guid boardId, int steps)
-        //{
-        //    // Implementation that loops or recursively calculates the states
-        //    // ...
-        //}
+        public BoardDTO GetXStepsState(Guid boardId, int steps)
+        {
+            var board = _boardStateRepository.GetBoard(boardId);
+            if (board == null)
+                throw new ArgumentException("Board not found", nameof(boardId));
+
+            for (int i = 0; i < steps; i++)
+            {
+                board = ApplyConwayRules(board);
+                board.Step += 1;
+                _boardStateRepository.SaveBoard(board);
+            }
+
+            return _mapper.Map<BoardDTO>(board);
+        }
 
         //public BoardDTO? GetFinalState(Guid boardId)
         //{
