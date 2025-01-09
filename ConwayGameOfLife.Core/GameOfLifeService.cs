@@ -43,7 +43,9 @@ namespace ConwayGameOfLife.Core
 
             var nextBoard = ApplyConwayRules(board);
 
-            nextBoard.Step = board.Step + 1;
+            board.Step++;
+
+            nextBoard.Step = board.Step;
 
             _boardStateRepository.SaveBoard(board);
 
@@ -68,8 +70,9 @@ namespace ConwayGameOfLife.Core
             {
                 board = ApplyConwayRules(board);
                 board.Step++;
-                _boardStateRepository.SaveBoard(board);
             }
+
+            _boardStateRepository.SaveBoard(board);
 
             return _mapper.Map<BoardDTO>(board);
         }
