@@ -26,6 +26,7 @@ namespace ConwayGameOfLife.Core
         public Guid UploadBoardState(BoardDTO boardDto)
         {
             var board = _mapper.Map<Board>(boardDto);
+            board.Step = 0;
             board.Id = Guid.NewGuid();
 
             _boardStateRepository.SaveBoard(board);
@@ -39,6 +40,9 @@ namespace ConwayGameOfLife.Core
                 throw new ArgumentException("Board not found", nameof(boardId));
 
             var nextBoard = ApplyConwayRules(board);
+
+            nextBoard.Step = board.Step + 1;
+
             _boardStateRepository.SaveBoard(nextBoard);
 
             return _mapper.Map<BoardDTO>(nextBoard);

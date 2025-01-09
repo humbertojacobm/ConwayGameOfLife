@@ -14,16 +14,18 @@ namespace ConwayGameOfLife.Infrastructure.Mapping
         public BoardMappingProfile()
         {
             CreateMap<BoardDTO, Board>()
-            .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
-            .ForMember(dest => dest.Width, opt => opt.MapFrom(src => src.Width))
-            .ForMember(dest => dest.Height, opt => opt.MapFrom(src => src.Height))
-            .ForMember(dest => dest.Cells, opt => opt.MapFrom(src => To2D(src.Cells)));
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.Width, opt => opt.MapFrom(src => src.Width))
+                .ForMember(dest => dest.Height, opt => opt.MapFrom(src => src.Height))
+                .ForMember(dest => dest.Cells, opt => opt.MapFrom(src => To2D(src.Cells)))
+                .ForMember(dest => dest.Step, opt => opt.MapFrom(src => src.Step));
 
             CreateMap<Board, BoardDTO>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Width, opt => opt.MapFrom(src => src.Width))
                 .ForMember(dest => dest.Height, opt => opt.MapFrom(src => src.Height))
-                .ForMember(dest => dest.Cells, opt => opt.MapFrom(src => ToJagged(src.Cells)));
+                .ForMember(dest => dest.Cells, opt => opt.MapFrom(src => ToJagged(src.Cells)))
+                .ForMember(dest => dest.Step, opt => opt.MapFrom(src => src.Step));
         }
 
         private bool[,] To2D(bool[][] jagged)

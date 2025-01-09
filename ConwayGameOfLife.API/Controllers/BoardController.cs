@@ -19,7 +19,6 @@ namespace ConwayGameOfLife.API.Controllers
         [HttpPost("upload")]
         public IActionResult UploadBoardState([FromBody] BoardDTO boardDto)
         {
-            // Will trigger FluentValidation automatically if BoardDtoValidator is setup
             var newBoardId = _gameOfLifeService.UploadBoardState(boardDto);
             return Ok(new { BoardId = newBoardId });
         }
