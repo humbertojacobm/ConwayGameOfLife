@@ -80,7 +80,8 @@ namespace ConwayGameOfLife.Core
                 Id = currentBoard.Id,
                 Width = currentBoard.Width,
                 Height = currentBoard.Height,
-                Cells = new bool[currentBoard.Height, currentBoard.Width]
+                Cells = new bool[currentBoard.Height, currentBoard.Width],
+                Step = currentBoard.Step
             };
 
             for (int row = 0; row < currentBoard.Height; row++)
