@@ -103,34 +103,29 @@ namespace ConwayGameOfLife.Core
                 $"Board does not reach a stable (final) state after {maxAttempts} attempts.");
         }
 
-        private Board ApplyConwayRules(Board currentBoard)
+        private Board ApplyConwayRules(Board board)
         {
-            if (currentBoard == null)
-                throw new ArgumentNullException(nameof(currentBoard));
+            if (board == null)
+                throw new ArgumentNullException(nameof(board));
 
-            var nextBoard = new Board
-            {
-                Id = currentBoard.Id,
-                Width = currentBoard.Width,
-                Height = currentBoard.Height,
-                Cells = new bool[currentBoard.Height, currentBoard.Width],
-                Step = currentBoard.Step
-            };
+            var updatedCells = new bool[board.Height, board.Width];
 
-            for (int row = 0; row < currentBoard.Height; row++)
+            for (int row = 0; row < board.Height; row++)
             {
-                for (int col = 0; col < currentBoard.Width; col++)
+                for (int col = 0; col < board.Width; col++)
                 {
-                    int livingNeighbors = CountLivingNeighbors(currentBoard, row, col);
-                    bool isAlive = currentBoard.Cells[row, col];
+                    int livingNeighbors = CountLivingNeighbors(board, row, col);
+                    bool isAlive = board.Cells[row, col];
 
-                    nextBoard.Cells[row, col] = isAlive
-                        ? (livingNeighbors == 2 || livingNeighbors == 3) // Survive
-                        : (livingNeighbors == 3);                        // Birth
+                    updatedCells[row, col] = isAlive
+                        ? (livingNeighbors == 2 || livingNeighbors == 3)
+                        : (livingNeighbors == 3);
                 }
             }
 
-            return nextBoard;
+            board.Cells = updatedCells;
+
+            return board;
         }
 
         private int CountLivingNeighbors(Board board, int row, int col)
