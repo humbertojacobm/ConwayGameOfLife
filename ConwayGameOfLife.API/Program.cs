@@ -6,6 +6,7 @@ using ConwayGameOfLife.Infrastructure.Validators;
 using FluentValidation.AspNetCore;
 using FluentValidation;
 using ConwayGameOfLife.API.Middleware;
+using Microsoft.EntityFrameworkCore;
 
 namespace ConwayGameOfLife.API
 {
@@ -15,14 +16,18 @@ namespace ConwayGameOfLife.API
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-
             builder.Services.AddControllers();
             builder.Services.AddFluentValidationAutoValidation();
             builder.Services.AddValidatorsFromAssemblyContaining<BoardDtoValidator>();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddDbContext<AppDbContext>(options =>
+                options.UseSqlServer(
+                    builder.Configuration.GetConnectionString("ConwayDb")
+                )
+            );
 
             builder.Services.AddScoped<IGameOfLifeService, GameOfLifeService>();
             builder.Services.AddScoped<IBoardStateRepository, BoardStateRepository>();
