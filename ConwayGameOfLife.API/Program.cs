@@ -5,6 +5,7 @@ using ConwayGameOfLife.Infrastructure.Repository;
 using ConwayGameOfLife.Infrastructure.Validators;
 using FluentValidation.AspNetCore;
 using FluentValidation;
+using ConwayGameOfLife.API.Middleware;
 
 namespace ConwayGameOfLife.API
 {
@@ -41,7 +42,7 @@ namespace ConwayGameOfLife.API
             }
 
             app.UseHttpsRedirection();
-
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
             app.UseAuthorization();
 
 
