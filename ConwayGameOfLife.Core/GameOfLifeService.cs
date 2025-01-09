@@ -30,7 +30,7 @@ namespace ConwayGameOfLife.Core
             board.Step = 0;
             board.Id = Guid.NewGuid();
 
-            _boardStateRepository.SaveBoard(board);
+            _boardStateRepository.CreateBoard(board);
             return board.Id;
         }
 
@@ -44,7 +44,7 @@ namespace ConwayGameOfLife.Core
 
             nextBoard.Step = board.Step + 1;
 
-            _boardStateRepository.SaveBoard(nextBoard);
+            _boardStateRepository.SaveBoard(board);
 
             return _mapper.Map<BoardDTO>(nextBoard);
         }

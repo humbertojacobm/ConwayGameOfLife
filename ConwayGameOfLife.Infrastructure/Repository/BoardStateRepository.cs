@@ -16,6 +16,12 @@ namespace ConwayGameOfLife.Infrastructure.Repository
             _context = context;
         }
 
+        public void CreateBoard(Board board)
+        {
+            _context.Boards.Add(board);
+            _context.SaveChanges();
+        }
+
         public void SaveBoard(Board board)
         {
             _context.Boards.Update(board);
