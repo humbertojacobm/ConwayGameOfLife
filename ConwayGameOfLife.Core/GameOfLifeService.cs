@@ -31,6 +31,7 @@ namespace ConwayGameOfLife.Core
             board.Id = Guid.NewGuid();
 
             _boardStateRepository.CreateBoard(board);
+
             return board.Id;
         }
 
