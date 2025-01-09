@@ -7,6 +7,6 @@ namespace ConwayGameOfLife.Core
         Guid UploadBoardState(BoardDTO boardDto);
         BoardDTO GetNextState(Guid boardId);
         BoardDTO GetXStepsState(Guid boardId, int steps);
-        //BoardDTO? GetFinalState(Guid boardId);
+        BoardDTO GetFinalState(Guid boardId, int maxAttempts);
     }
 }

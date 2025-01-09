@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using ConwayGameOfLife.Common;
 using ConwayGameOfLife.DatabaseModels;
 using ConwayGameOfLife.DTO;
 using ConwayGameOfLife.Infrastructure.Repository;
@@ -72,11 +73,31 @@ namespace ConwayGameOfLife.Core
             return _mapper.Map<BoardDTO>(board);
         }
 
-        //public BoardDTO? GetFinalState(Guid boardId)
-        //{
-        //    // Implementation that calculates until a stable state or max iteration is reached
-        //    // Return null if it does not converge
-        //}
+        public BoardDTO GetFinalState(Guid boardId, int maxAttempts)
+        {
+            var currentBoard = _boardStateRepository.GetBoard(boardId);
+            if (currentBoard == null)
+                throw new ArgumentException("Board not found.", nameof(boardId));
+
+            for (int i = 0; i < maxAttempts; i++)
+            {
+                var nextBoard = ApplyConwayRules(currentBoard);
+
+                if (Helper.AreBoardsEqual(currentBoard, nextBoard))
+                {
+                    _boardStateRepository.SaveBoard(currentBoard);
+
+                    return _mapper.Map<BoardDTO>(currentBoard);
+                }
+
+                nextBoard.Step = currentBoard.Step + 1;
+                _boardStateRepository.SaveBoard(nextBoard);
+                currentBoard = nextBoard;
+            }
+
+            throw new InvalidOperationException(
+                $"Board does not reach a stable (final) state after {maxAttempts} attempts.");
+        }
 
         private Board ApplyConwayRules(Board currentBoard)
         {

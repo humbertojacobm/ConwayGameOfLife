@@ -51,16 +51,25 @@ namespace ConwayGameOfLife.API.Controllers
             }
         }
 
-        //[HttpGet("{id}/final")]
-        //public IActionResult GetFinalState(Guid id)
-        //{
-        //    var finalState = _gameOfLifeService.GetFinalState(id);
-        //    if (finalState == null)
-        //    {
-        //        return BadRequest("Board does not reach a final state in the specified attempt limit.");
-        //    }
+        [HttpGet("{id}/final/{maxAttempts}")]
+        public IActionResult GetFinalState(Guid id, int maxAttempts)
+        {
+            if (maxAttempts < 1)
+                return BadRequest("Max attempts must be greater than 0.");
 
-        //    return Ok(finalState);
-        //}
+            try
+            {
+                var finalBoardDto = _gameOfLifeService.GetFinalState(id, maxAttempts);
+                return Ok(finalBoardDto);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (ArgumentException ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
     }
 }
