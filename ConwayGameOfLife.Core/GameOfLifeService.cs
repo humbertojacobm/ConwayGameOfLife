@@ -63,7 +63,7 @@ namespace ConwayGameOfLife.Core
 
         public BoardDTO GetXStepsState(Guid boardId, int requestedStep)
         {
-            var board = _boardStateRepository.GetBoard(boardId);
+            var board = _boardStateRepository.GetBoardAsNotTracked(boardId);
             if (board == null)
                 throw new ArgumentException("Board not found", nameof(boardId));
 
@@ -77,11 +77,29 @@ namespace ConwayGameOfLife.Core
 
             for (int i = 0; i < stepsToAdvance; i++)
             {
-                board = ApplyConwayRules(board);
-                board.Step++;
+                var nextBoard = ApplyConwayRules(board);
+
+                if (Helper.AreBoardsEqual(board, nextBoard))
+                {
+                    nextBoard.Step = board.Step;
+                    board = nextBoard;
+                    break;
+                }else
+                {
+                    board.Cells = nextBoard.Cells;
+                    board.Step++;
+                    nextBoard.Step = board.Step;
+                    board = nextBoard;
+                }
             }
 
-            _boardStateRepository.SaveBoard(board);
+            var finalBoard = _boardStateRepository.GetBoard(boardId);
+            if (finalBoard == null)
+                throw new InvalidOperationException("Board record not found in DB while updating final state.");
+
+            finalBoard.Step = board.Step;
+            finalBoard.Cells = board.Cells;
+            _boardStateRepository.SaveBoard(finalBoard);
 
             return _mapper.Map<BoardDTO>(board);
         }

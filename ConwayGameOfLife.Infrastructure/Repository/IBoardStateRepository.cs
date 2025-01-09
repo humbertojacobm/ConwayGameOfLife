@@ -7,5 +7,6 @@ namespace ConwayGameOfLife.Infrastructure.Repository
         void CreateBoard(Board board);
         void SaveBoard(Board board);
         Board? GetBoard(Guid boardId);
+        Board? GetBoardAsNotTracked(Guid boardId);
     }
 }

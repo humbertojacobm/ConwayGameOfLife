@@ -1,4 +1,5 @@
 ﻿using ConwayGameOfLife.DatabaseModels;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,13 @@ namespace ConwayGameOfLife.Infrastructure.Repository
         public Board? GetBoard(Guid boardId)
         {
             return _context.Boards.Find(boardId);
+        }
+
+        public Board? GetBoardAsNotTracked(Guid boardId)
+        {
+            return _context.Boards
+                .AsNoTracking()
+                .FirstOrDefault(b => b.Id == boardId);
         }
     }
 }
