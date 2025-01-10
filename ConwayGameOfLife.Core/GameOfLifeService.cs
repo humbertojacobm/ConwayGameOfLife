@@ -106,28 +106,46 @@ namespace ConwayGameOfLife.Core
 
         public BoardDTO GetFinalState(Guid boardId, int maxAttempts)
         {
-            var currentBoard = _boardStateRepository.GetBoard(boardId);
-            if (currentBoard == null)
+            var board = _boardStateRepository.GetBoardAsNotTracked(boardId);
+            if (board == null)
                 throw new ArgumentException("Board not found.", nameof(boardId));
+
+            var isSteady = false;
 
             for (int i = 0; i < maxAttempts; i++)
             {
-                var nextBoard = ApplyConwayRules(currentBoard);
+                var nextBoard = ApplyConwayRules(board);
 
-                if (Helper.AreBoardsEqual(currentBoard, nextBoard))
+                if (Helper.AreBoardsEqual(board, nextBoard))
                 {
-                    _boardStateRepository.SaveBoard(currentBoard);
-
-                    return _mapper.Map<BoardDTO>(currentBoard);
+                    nextBoard.Step = board.Step;
+                    board = nextBoard;
+                    isSteady = true;
+                    break;
                 }
-
-                nextBoard.Step = currentBoard.Step + 1;
-                _boardStateRepository.SaveBoard(nextBoard);
-                currentBoard = nextBoard;
+                else
+                {
+                    board.Cells = nextBoard.Cells;
+                    board.Step++;
+                    nextBoard.Step = board.Step;
+                    board = nextBoard;
+                }
             }
 
-            throw new InvalidOperationException(
-                $"Board does not reach a stable (final) state after {maxAttempts} attempts.");
+            if (!isSteady)
+            {
+                throw new InvalidOperationException($"Board does not reach a stable (final) state after {maxAttempts} attempts.");
+            }
+
+            var finalBoard = _boardStateRepository.GetBoard(boardId);
+            if (finalBoard == null)
+                throw new InvalidOperationException("Board record not found in DB while updating final state.");
+
+            finalBoard.Step = board.Step;
+            finalBoard.Cells = board.Cells;
+            _boardStateRepository.SaveBoard(finalBoard);
+
+            return _mapper.Map<BoardDTO>(board);
         }
 
         private Board ApplyConwayRules(Board currentBoard)
@@ -152,8 +170,8 @@ namespace ConwayGameOfLife.Core
                     bool isAlive = currentBoard.Cells[row, col];
 
                     nextBoard.Cells[row, col] = isAlive
-                        ? (livingNeighbors == 2 || livingNeighbors == 3) // Survive
-                        : (livingNeighbors == 3);                        // Birth
+                        ? (livingNeighbors == 2 || livingNeighbors == 3)
+                        : (livingNeighbors == 3);                        
                 }
             }
 
@@ -168,11 +186,9 @@ namespace ConwayGameOfLife.Core
             {
                 for (int nc = col - 1; nc <= col + 1; nc++)
                 {
-                    // Skip the cell itself
                     if (nr == row && nc == col)
                         continue;
 
-                    // Check boundaries
                     if (nr >= 0 && nr < board.Height && nc >= 0 && nc < board.Width)
                     {
                         if (board.Cells[nr, nc])
