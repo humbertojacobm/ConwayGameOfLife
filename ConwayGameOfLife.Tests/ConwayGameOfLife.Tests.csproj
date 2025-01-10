@@ -21,7 +21,6 @@
     <ProjectReference Include="..\ConwayGameOfLife.Common\ConwayGameOfLife.Common.csproj" />
     <ProjectReference Include="..\ConwayGameOfLife.Core\ConwayGameOfLife.Core.csproj" />
     <ProjectReference Include="..\ConwayGameOfLife.DatabaseModels\ConwayGameOfLife.DatabaseModels.csproj" />
-    <ProjectReference Include="..\ConwayGameOfLife.DTO\ConwayGameOfLife.DTO.csproj" />
     <ProjectReference Include="..\ConwayGameOfLife.Infrastructure\ConwayGameOfLife.Infrastructure.csproj" />
   </ItemGroup>
 

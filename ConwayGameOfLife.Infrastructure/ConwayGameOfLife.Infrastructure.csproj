@@ -20,7 +20,6 @@
   <ItemGroup>
     <ProjectReference Include="..\ConwayGameOfLife.Common\ConwayGameOfLife.Common.csproj" />
     <ProjectReference Include="..\ConwayGameOfLife.DatabaseModels\ConwayGameOfLife.DatabaseModels.csproj" />
-    <ProjectReference Include="..\ConwayGameOfLife.DTO\ConwayGameOfLife.DTO.csproj" />
   </ItemGroup>
 
 </Project>

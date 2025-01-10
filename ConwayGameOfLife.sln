@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConwayGameOfLife.Infrastruc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConwayGameOfLife.DatabaseModels", "ConwayGameOfLife.DatabaseModels\ConwayGameOfLife.DatabaseModels.csproj", "{21A8BBFC-4C31-4E8F-8C97-10B5EE20B01D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConwayGameOfLife.DTO", "ConwayGameOfLife.DTO\ConwayGameOfLife.DTO.csproj", "{364E6401-E64F-44D4-B8D3-AB12BC0783EF}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConwayGameOfLife.Core", "ConwayGameOfLife.Core\ConwayGameOfLife.Core.csproj", "{6D47F648-B8B6-4242-8D44-8810E34B88DF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConwayGameOfLife.Common", "ConwayGameOfLife.Common\ConwayGameOfLife.Common.csproj", "{BA2BC66B-69BB-4259-BEB1-53035873BFF9}"
@@ -41,10 +39,6 @@ Global
 		{21A8BBFC-4C31-4E8F-8C97-10B5EE20B01D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{21A8BBFC-4C31-4E8F-8C97-10B5EE20B01D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{21A8BBFC-4C31-4E8F-8C97-10B5EE20B01D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{364E6401-E64F-44D4-B8D3-AB12BC0783EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{364E6401-E64F-44D4-B8D3-AB12BC0783EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{364E6401-E64F-44D4-B8D3-AB12BC0783EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{364E6401-E64F-44D4-B8D3-AB12BC0783EF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6D47F648-B8B6-4242-8D44-8810E34B88DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6D47F648-B8B6-4242-8D44-8810E34B88DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D47F648-B8B6-4242-8D44-8810E34B88DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
