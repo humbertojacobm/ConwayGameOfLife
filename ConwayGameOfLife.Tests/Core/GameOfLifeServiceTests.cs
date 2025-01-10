@@ -153,6 +153,45 @@ namespace ConwayGameOfLife.Tests.Core
             _mockRepo.Verify(r => r.SaveBoardAsync(It.Is<Board>(b => b.Step == 11)), Times.Once);
         }
 
+        [Test]
+        public async Task GetXStepsStateAsync_WhenRequestedStepEqualsCurrent_ShouldReturnSameState()
+        {
+            // Arrange
+            var boardId = Guid.NewGuid();
+            var existingBoard = new Board
+            {
+                Id = boardId,
+                Width = 3,
+                Height = 3,
+                Step = 5,
+                Cells = new bool[3, 3]
+                {
+            { false, false, false },
+            { false, true, false },
+            { false, false, false }
+                }
+            };
+
+            _mockRepo
+                .Setup(r => r.GetBoardAsNotTrackedAsync(boardId))
+                .ReturnsAsync(existingBoard);
+
+            _mockRepo
+                .Setup(r => r.GetBoardAsync(boardId))
+                .ReturnsAsync(existingBoard);
+
+            _mockRepo
+                .Setup(r => r.SaveBoardAsync(It.IsAny<Board>()))
+                .Returns(Task.CompletedTask);
+
+            // Act
+            var boardDto = await _service.GetXStepsStateAsync(boardId, 5);
+
+            // Assert
+            Assert.That(boardDto.Step, Is.EqualTo(5), "Step should remain the same when requested step equals current step.");
+            _mockRepo.Verify(r => r.SaveBoardAsync(It.IsAny<Board>()), Times.AtLeastOnce);
+        }
+
         private bool[][] ConvertToJagged(bool[,] twoD)
         {
             int height = twoD.GetLength(0);
