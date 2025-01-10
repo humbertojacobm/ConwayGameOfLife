@@ -1,4 +1,3 @@
-
 using ConwayGameOfLife.Core;
 using ConwayGameOfLife.Infrastructure.Mapping;
 using ConwayGameOfLife.Infrastructure.Repository;
@@ -16,17 +15,29 @@ namespace ConwayGameOfLife.API
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            string dbPasswordPath = "/run/secrets/ConwayDbPassword";
+            string dbPassword = string.Empty;
+
+            if (File.Exists(dbPasswordPath))
+            {
+                dbPassword = File.ReadAllText(dbPasswordPath).Trim();
+            }
+            else
+            {
+                throw new FileNotFoundException($"Secret not found at {dbPasswordPath}");
+            }
+
+            var rawConnectionString = builder.Configuration.GetConnectionString("ConwayDb");
+            var connectionString = rawConnectionString.Replace("{DB_PASSWORD}", dbPassword);
+
             builder.Services.AddControllers();
             builder.Services.AddFluentValidationAutoValidation();
             builder.Services.AddValidatorsFromAssemblyContaining<BoardDtoValidator>();
-
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
             builder.Services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlServer(
-                    builder.Configuration.GetConnectionString("ConwayDb")
-                )
+                options.UseSqlServer(connectionString)
             );
 
             builder.Services.AddScoped<IGameOfLifeService, GameOfLifeService>();
@@ -49,10 +60,7 @@ namespace ConwayGameOfLife.API
             app.UseHttpsRedirection();
             app.UseMiddleware<ExceptionHandlingMiddleware>();
             app.UseAuthorization();
-
-
             app.MapControllers();
-
             app.Run();
         }
     }
