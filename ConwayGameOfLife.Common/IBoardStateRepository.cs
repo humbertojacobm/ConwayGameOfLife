@@ -1,6 +1,6 @@
 ﻿using ConwayGameOfLife.DatabaseModels;
 
-namespace ConwayGameOfLife.Infrastructure.Repository
+namespace ConwayGameOfLife.Common
 {
     public interface IBoardStateRepository
     {

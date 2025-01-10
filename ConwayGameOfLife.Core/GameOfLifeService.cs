@@ -2,7 +2,6 @@
 using ConwayGameOfLife.Common;
 using ConwayGameOfLife.DatabaseModels;
 using ConwayGameOfLife.DTO;
-using ConwayGameOfLife.Infrastructure.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
