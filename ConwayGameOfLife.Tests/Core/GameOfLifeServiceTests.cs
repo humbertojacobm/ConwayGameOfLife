@@ -23,6 +23,20 @@ namespace ConwayGameOfLife.Tests.Core
             _mockRepo = new Mock<IBoardStateRepository>();
             _mockMapper = new Mock<IMapper>();
 
+            _mockMapper
+                .Setup(m => m.Map<BoardDTO>(It.IsAny<Board>()))
+                .Returns((Board b) => new BoardDTO
+                {
+                    Id = b.Id,
+                    Width = b.Width,
+                    Height = b.Height,
+                    Step = b.Step,
+                    Cells = b.Cells is null
+                        ? null
+                        : ConvertToJagged(b.Cells) 
+                });
+
+
             _service = new GameOfLifeService(_mockRepo.Object, _mockMapper.Object);
         }
 
@@ -33,7 +47,7 @@ namespace ConwayGameOfLife.Tests.Core
             var boardDto = new BoardDTO
             {
                 Width = 5,
-                Height = 5,
+                Height = 5
             };
 
             var mappedBoard = new Board
@@ -55,7 +69,6 @@ namespace ConwayGameOfLife.Tests.Core
 
             // Assert
             Assert.That(resultId, Is.Not.EqualTo(Guid.Empty), "Board ID should not be empty");
-
             _mockRepo.Verify(r => r.CreateBoardAsync(It.Is<Board>(b => b.Width == 5 && b.Height == 5)), Times.Once);
         }
 
@@ -81,7 +94,6 @@ namespace ConwayGameOfLife.Tests.Core
         [Test]
         public async Task GetNextStateAsync_WhenBoardIsStable_ShouldNotIncrementStep()
         {
-
             // Arrange
             var boardId = Guid.NewGuid();
             var existingBoard = new Board
@@ -92,9 +104,9 @@ namespace ConwayGameOfLife.Tests.Core
                 Step = 10,
                 Cells = new bool[3, 3]
                 {
-            { false, false, false},
-            { false, false, false},
-            { false, false, false}
+                    { false, false, false },
+                    { false, false, false },
+                    { false, false, false }
                 }
             };
 
@@ -102,25 +114,11 @@ namespace ConwayGameOfLife.Tests.Core
                 .Setup(r => r.GetBoardAsync(boardId))
                 .ReturnsAsync(existingBoard);
 
-            _mockMapper
-                .Setup(m => m.Map<BoardDTO>(It.IsAny<Board>()))
-                .Returns((Board b) => new BoardDTO
-                {
-                    Id = b.Id,
-                    Width = b.Width,
-                    Height = b.Height,
-                    Step = b.Step,
-                    Cells = b.Cells is null
-                        ? null
-                        : ConvertToJagged(b.Cells)
-                });
-
             // Act
             var boardDto = await _service.GetNextStateAsync(boardId);
 
             // Assert
             Assert.That(boardDto.Step, Is.EqualTo(10), "Step should remain the same for a stable board.");
-
             _mockRepo.Verify(r => r.SaveBoardAsync(It.IsAny<Board>()), Times.Never);
         }
 
@@ -137,26 +135,15 @@ namespace ConwayGameOfLife.Tests.Core
                 Step = 10,
                 Cells = new bool[3, 3]
                 {
-            { false, true, false },
-            { false, true, false },
-            { false, false, false }
+                    { false, true, false },
+                    { false, true, false },
+                    { false, false, false }
                 }
             };
 
             _mockRepo
                 .Setup(r => r.GetBoardAsync(boardId))
                 .ReturnsAsync(existingBoard);
-
-            _mockMapper
-                .Setup(m => m.Map<BoardDTO>(It.IsAny<Board>()))
-                .Returns((Board b) => new BoardDTO
-                {
-                    Id = b.Id,
-                    Width = b.Width,
-                    Height = b.Height,
-                    Step = b.Step,
-                    Cells = ConvertToJagged(b.Cells)
-                });
 
             // Act
             var boardDto = await _service.GetNextStateAsync(boardId);
