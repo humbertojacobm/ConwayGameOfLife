@@ -24,9 +24,7 @@ namespace ConwayGameOfLife.Infrastructure.Repository
             modelBuilder.Entity<Board>()
                 .HasKey(b => b.Id);
 
-            // Our custom ValueConverter
             var boolArrayConverter = new ValueConverter<bool[,], string>(
-                // EF can handle these "method call" expressions 
                 twoD => ConvertTwoDToString(twoD),
                 json => ConvertStringToTwoD(json)
             );
