@@ -7,6 +7,7 @@ using ConwayGameOfLife.DatabaseModels;
 using ConwayGameOfLife.DTO;
 using ConwayGameOfLife.Infrastructure.Repository;
 using AutoMapper;
+using ConwayGameOfLife.Common;
 
 namespace ConwayGameOfLife.Tests.Core
 {
@@ -190,6 +191,41 @@ namespace ConwayGameOfLife.Tests.Core
             // Assert
             Assert.That(boardDto.Step, Is.EqualTo(5), "Step should remain the same when requested step equals current step.");
             _mockRepo.Verify(r => r.SaveBoardAsync(It.IsAny<Board>()), Times.AtLeastOnce);
+        }
+
+        [Test]
+        public async Task GetFinalStateAsync_FinalBoardNotFound_ShouldThrowInvalidOperationException()
+        {
+            // Arrange
+            var boardId = Guid.NewGuid();
+            var existingBoard = new Board
+            {
+                Id = boardId,
+                Width = 3,
+                Height = 3,
+                Step = 5,
+                Cells = new bool[3, 3]
+                {
+                    { false, false, false },
+                    { false, false, false },
+                    { false, false, false }
+                }
+            };
+
+            _mockRepo
+                .Setup(r => r.GetBoardAsNotTrackedAsync(boardId))
+                .ReturnsAsync(existingBoard);
+
+            _mockRepo
+                .Setup(r => r.GetBoardAsync(boardId))
+                .ReturnsAsync((Board?)null);
+
+            var ex = Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            {
+                await _service.GetFinalStateAsync(boardId, maxAttempts: 10);
+            });
+
+            Assert.That(ex!.Message, Does.Contain("Board record not found in DB while updating final state."));
         }
 
         private bool[][] ConvertToJagged(bool[,] twoD)
