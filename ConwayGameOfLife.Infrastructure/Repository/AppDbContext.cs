@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using ConwayGameOfLife.DatabaseModels;
+using ConwayGameOfLife.EntityLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using System;

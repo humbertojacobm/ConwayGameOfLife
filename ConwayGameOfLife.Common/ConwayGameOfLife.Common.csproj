@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ConwayGameOfLife.DatabaseModels\ConwayGameOfLife.DatabaseModels.csproj" />
+    <ProjectReference Include="..\ConwayGameOfLife.EntityLayer\ConwayGameOfLife.EntityLayer.csproj" />
   </ItemGroup>
 
 </Project>

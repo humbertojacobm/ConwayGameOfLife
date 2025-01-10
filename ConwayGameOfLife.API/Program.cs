@@ -6,6 +6,7 @@ using FluentValidation.AspNetCore;
 using FluentValidation;
 using ConwayGameOfLife.API.Middleware;
 using Microsoft.EntityFrameworkCore;
+using ConwayGameOfLife.Common;
 
 namespace ConwayGameOfLife.API
 {

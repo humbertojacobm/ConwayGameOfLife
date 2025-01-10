@@ -3,7 +3,7 @@ using Moq;
 using System;
 using System.Threading.Tasks;
 using ConwayGameOfLife.Core;
-using ConwayGameOfLife.DatabaseModels;
+using ConwayGameOfLife.EntityLayer;
 using ConwayGameOfLife.DTO;
 using ConwayGameOfLife.Infrastructure.Repository;
 using AutoMapper;

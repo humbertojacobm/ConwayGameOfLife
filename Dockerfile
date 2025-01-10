@@ -9,7 +9,7 @@ COPY ConwayGameOfLife.sln ./
 COPY ConwayGameOfLife.API/*.csproj ConwayGameOfLife.API/
 COPY ConwayGameOfLife.Core/*.csproj ConwayGameOfLife.Core/
 COPY ConwayGameOfLife.Infrastructure/*.csproj ConwayGameOfLife.Infrastructure/
-COPY ConwayGameOfLife.DatabaseModels/*.csproj ConwayGameOfLife.DatabaseModels/
+COPY ConwayGameOfLife.EntityLayer/*.csproj ConwayGameOfLife.EntityLayer/
 COPY ConwayGameOfLife.DTO/*.csproj ConwayGameOfLife.DTO/
 COPY ConwayGameOfLife.Common/*.csproj ConwayGameOfLife.Common/
 COPY ConwayGameOfLife.Tests/*.csproj ConwayGameOfLife.Tests/
@@ -21,7 +21,7 @@ RUN dotnet restore
 COPY ConwayGameOfLife.API/ ConwayGameOfLife.API/
 COPY ConwayGameOfLife.Core/ ConwayGameOfLife.Core/
 COPY ConwayGameOfLife.Infrastructure/ ConwayGameOfLife.Infrastructure/
-COPY ConwayGameOfLife.DatabaseModels/ ConwayGameOfLife.DatabaseModels/
+COPY ConwayGameOfLife.EntityLayer/ ConwayGameOfLife.EntityLayer/
 COPY ConwayGameOfLife.DTO/ ConwayGameOfLife.DTO/
 COPY ConwayGameOfLife.Common/ ConwayGameOfLife.Common/
 COPY ConwayGameOfLife.Tests/ ConwayGameOfLife.Tests/

@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConwayGameOfLife.API", "Con
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConwayGameOfLife.Infrastructure", "ConwayGameOfLife.Infrastructure\ConwayGameOfLife.Infrastructure.csproj", "{C37978FD-52E6-478C-9BDD-27517F318C56}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConwayGameOfLife.DatabaseModels", "ConwayGameOfLife.DatabaseModels\ConwayGameOfLife.DatabaseModels.csproj", "{21A8BBFC-4C31-4E8F-8C97-10B5EE20B01D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConwayGameOfLife.EntityLayer", "ConwayGameOfLife.EntityLayer\ConwayGameOfLife.EntityLayer.csproj", "{21A8BBFC-4C31-4E8F-8C97-10B5EE20B01D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConwayGameOfLife.Core", "ConwayGameOfLife.Core\ConwayGameOfLife.Core.csproj", "{6D47F648-B8B6-4242-8D44-8810E34B88DF}"
 EndProject

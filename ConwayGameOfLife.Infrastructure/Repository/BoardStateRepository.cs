@@ -1,5 +1,5 @@
 ﻿using ConwayGameOfLife.Common;
-using ConwayGameOfLife.DatabaseModels;
+using ConwayGameOfLife.EntityLayer;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

@@ -1,4 +1,4 @@
-﻿namespace ConwayGameOfLife.DatabaseModels
+﻿namespace ConwayGameOfLife.EntityLayer
 {
     public class Board
     {

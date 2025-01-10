@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using ConwayGameOfLife.Common;
-using ConwayGameOfLife.DatabaseModels;
+using ConwayGameOfLife.EntityLayer;
 using ConwayGameOfLife.DTO;
 using System;
 using System.Collections.Generic;

@@ -1,4 +1,4 @@
-﻿using ConwayGameOfLife.DatabaseModels;
+﻿using ConwayGameOfLife.EntityLayer;
 
 namespace ConwayGameOfLife.Common
 {
