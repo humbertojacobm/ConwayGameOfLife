@@ -17,28 +17,28 @@ namespace ConwayGameOfLife.Infrastructure.Repository
             _context = context;
         }
 
-        public void CreateBoard(Board board)
+        public async Task CreateBoardAsync(Board board)
         {
-            _context.Boards.Add(board);
-            _context.SaveChanges();
+            await _context.Boards.AddAsync(board);
+            await _context.SaveChangesAsync();
         }
 
-        public void SaveBoard(Board board)
+        public async Task SaveBoardAsync(Board board)
         {
             _context.Boards.Update(board);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public Board? GetBoard(Guid boardId)
+        public async Task<Board?> GetBoardAsync(Guid boardId)
         {
-            return _context.Boards.Find(boardId);
+            return await _context.Boards.FindAsync(boardId);
         }
 
-        public Board? GetBoardAsNotTracked(Guid boardId)
+        public async Task<Board?> GetBoardAsNotTrackedAsync(Guid boardId)
         {
-            return _context.Boards
+            return await _context.Boards
                 .AsNoTracking()
-                .FirstOrDefault(b => b.Id == boardId);
+                .FirstOrDefaultAsync(b => b.Id == boardId);
         }
     }
 }

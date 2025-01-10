@@ -4,9 +4,9 @@ namespace ConwayGameOfLife.Core
 {
     public interface IGameOfLifeService
     {
-        Guid UploadBoardState(BoardDTO boardDto);
-        BoardDTO GetNextState(Guid boardId);
-        BoardDTO GetXStepsState(Guid boardId, int steps);
-        BoardDTO GetFinalState(Guid boardId, int maxAttempts);
+        Task<Guid> UploadBoardStateAsync(BoardDTO boardDto);
+        Task<BoardDTO> GetNextStateAsync(Guid boardId);
+        Task<BoardDTO> GetXStepsStateAsync(Guid boardId, int requestedStep);
+        Task<BoardDTO> GetFinalStateAsync(Guid boardId, int maxAttempts);
     }
 }

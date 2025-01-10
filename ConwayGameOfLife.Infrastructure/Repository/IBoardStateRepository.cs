@@ -4,9 +4,9 @@ namespace ConwayGameOfLife.Infrastructure.Repository
 {
     public interface IBoardStateRepository
     {
-        void CreateBoard(Board board);
-        void SaveBoard(Board board);
-        Board? GetBoard(Guid boardId);
-        Board? GetBoardAsNotTracked(Guid boardId);
+        Task CreateBoardAsync(Board board);
+        Task SaveBoardAsync(Board board);
+        Task<Board?> GetBoardAsync(Guid boardId);
+        Task<Board?> GetBoardAsNotTrackedAsync(Guid boardId);
     }
 }

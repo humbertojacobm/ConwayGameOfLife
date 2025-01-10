@@ -17,28 +17,28 @@ namespace ConwayGameOfLife.API.Controllers
         }
 
         [HttpPost("upload")]
-        public IActionResult UploadBoardState([FromBody] BoardDTO boardDto)
+        public async Task<IActionResult> UploadBoardState([FromBody] BoardDTO boardDto)
         {
-            var newBoardId = _gameOfLifeService.UploadBoardState(boardDto);
+            var newBoardId = await _gameOfLifeService.UploadBoardStateAsync(boardDto);
             return Ok(new { BoardId = newBoardId });
         }
 
         [HttpGet("{id}/next")]
-        public IActionResult GetNextState(Guid id)
+        public async Task<IActionResult> GetNextState(Guid id)
         {
-            var nextBoardState = _gameOfLifeService.GetNextState(id);
+            var nextBoardState = await _gameOfLifeService.GetNextStateAsync(id);
             return Ok(nextBoardState);
         }
 
         [HttpGet("{id}/steps/{x}")]
-        public IActionResult GetXSteps(Guid id, int x)
+        public async Task<IActionResult> GetXSteps(Guid id, int x)
         {
             if (x < 0)
                 return BadRequest("Number of steps must be non-negative.");
 
             try
             {
-                var boardDto = _gameOfLifeService.GetXStepsState(id, x);
+                var boardDto = await _gameOfLifeService.GetXStepsStateAsync(id, x);
                 return Ok(boardDto);
             }
             catch (InvalidOperationException ex)
@@ -52,14 +52,14 @@ namespace ConwayGameOfLife.API.Controllers
         }
 
         [HttpGet("{id}/final/{maxAttempts}")]
-        public IActionResult GetFinalState(Guid id, int maxAttempts)
+        public async Task<IActionResult> GetFinalState(Guid id, int maxAttempts)
         {
             if (maxAttempts < 1)
                 return BadRequest("Max attempts must be greater than 0.");
 
             try
             {
-                var finalBoardDto = _gameOfLifeService.GetFinalState(id, maxAttempts);
+                var finalBoardDto = await _gameOfLifeService.GetFinalStateAsync(id, maxAttempts);
                 return Ok(finalBoardDto);
             }
             catch (InvalidOperationException ex)

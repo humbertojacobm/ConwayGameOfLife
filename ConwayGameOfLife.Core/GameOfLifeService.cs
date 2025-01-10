@@ -24,20 +24,20 @@ namespace ConwayGameOfLife.Core
             _mapper = mapper;
         }
 
-        public Guid UploadBoardState(BoardDTO boardDto)
+        public async Task<Guid> UploadBoardStateAsync(BoardDTO boardDto)
         {
             var board = _mapper.Map<Board>(boardDto);
             board.Step = 0;
             board.Id = Guid.NewGuid();
 
-            _boardStateRepository.CreateBoard(board);
+            await _boardStateRepository.CreateBoardAsync(board);
 
             return board.Id;
         }
 
-        public BoardDTO GetNextState(Guid boardId)
+        public async Task<BoardDTO> GetNextStateAsync(Guid boardId)
         {
-            var board = _boardStateRepository.GetBoard(boardId);
+            var board = await _boardStateRepository.GetBoardAsync(boardId);
             if (board == null)
                 throw new ArgumentException("Board not found", nameof(boardId));
 
@@ -50,20 +50,18 @@ namespace ConwayGameOfLife.Core
             else
             {
                 board.Cells = nextBoard.Cells;
-
                 board.Step++;
-
                 nextBoard.Step = board.Step;
 
-                _boardStateRepository.SaveBoard(board);
+                await _boardStateRepository.SaveBoardAsync(board);
             }
 
             return _mapper.Map<BoardDTO>(nextBoard);
         }
 
-        public BoardDTO GetXStepsState(Guid boardId, int requestedStep)
+        public async Task<BoardDTO> GetXStepsStateAsync(Guid boardId, int requestedStep)
         {
-            var board = _boardStateRepository.GetBoardAsNotTracked(boardId);
+            var board = await _boardStateRepository.GetBoardAsNotTrackedAsync(boardId);
             if (board == null)
                 throw new ArgumentException("Board not found", nameof(boardId));
 
@@ -84,7 +82,8 @@ namespace ConwayGameOfLife.Core
                     nextBoard.Step = board.Step;
                     board = nextBoard;
                     break;
-                }else
+                }
+                else
                 {
                     board.Cells = nextBoard.Cells;
                     board.Step++;
@@ -93,24 +92,25 @@ namespace ConwayGameOfLife.Core
                 }
             }
 
-            var finalBoard = _boardStateRepository.GetBoard(boardId);
+            var finalBoard = await _boardStateRepository.GetBoardAsync(boardId);
             if (finalBoard == null)
                 throw new InvalidOperationException("Board record not found in DB while updating final state.");
 
             finalBoard.Step = board.Step;
             finalBoard.Cells = board.Cells;
-            _boardStateRepository.SaveBoard(finalBoard);
+
+            await _boardStateRepository.SaveBoardAsync(finalBoard);
 
             return _mapper.Map<BoardDTO>(board);
         }
 
-        public BoardDTO GetFinalState(Guid boardId, int maxAttempts)
+        public async Task<BoardDTO> GetFinalStateAsync(Guid boardId, int maxAttempts)
         {
-            var board = _boardStateRepository.GetBoardAsNotTracked(boardId);
+            var board = await _boardStateRepository.GetBoardAsNotTrackedAsync(boardId);
             if (board == null)
                 throw new ArgumentException("Board not found.", nameof(boardId));
 
-            var isSteady = false;
+            bool isSteady = false;
 
             for (int i = 0; i < maxAttempts; i++)
             {
@@ -134,16 +134,17 @@ namespace ConwayGameOfLife.Core
 
             if (!isSteady)
             {
-                throw new InvalidOperationException($"Board does not reach a stable (final) state after {maxAttempts} attempts.");
+                throw new InvalidOperationException(
+                    $"Board does not reach a stable (final) state after {maxAttempts} attempts.");
             }
 
-            var finalBoard = _boardStateRepository.GetBoard(boardId);
+            var finalBoard = await _boardStateRepository.GetBoardAsync(boardId);
             if (finalBoard == null)
                 throw new InvalidOperationException("Board record not found in DB while updating final state.");
 
             finalBoard.Step = board.Step;
             finalBoard.Cells = board.Cells;
-            _boardStateRepository.SaveBoard(finalBoard);
+            await _boardStateRepository.SaveBoardAsync(finalBoard);
 
             return _mapper.Map<BoardDTO>(board);
         }
