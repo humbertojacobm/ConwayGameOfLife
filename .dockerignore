@@ -1,0 +1,25 @@
+# Version control directories
+.git
+.hg
+
+# IDE directories
+.vscode
+.idea
+.vs
+
+# Build output directories
+**/bin
+**/obj
+
+# Docker-related files
+Dockerfile
+.dockerignore
+
+# Other unnecessary files
+*.md
+*.suo
+*.user
+*.userosscache
+*.cache
+*.xml
+.DS_Store
