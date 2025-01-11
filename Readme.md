@@ -9,6 +9,7 @@ ConwayGameOfLife is a project that implements Conway's Game of Life following th
 
 The following technologies are used in this project:
 
+- **Asynchronous Programming** (to handle I/O-bound latency effectively)
 - **Native Dependency Injection** (provided by ASP.NET Core Web API)
 - **Fluent Validation**
 - **AutoMapper**
@@ -61,6 +62,10 @@ This application is built with scalability in mind:
 ## Features and Improvements
 
 This repository demonstrates the flexibility of Clean Architecture by enabling:
+
+- **Nested Loops Analysis**: The application contains parts with nested loops of two levels. We are exploring whether serverless functions, such as AWS Lambda or Azure Durable Functions, could optimize these operations for better scalability and performance.
+
+- **Parallel Programming**: The `main` branch includes an enhancement using parallel programming to address CPU-bound latency in the processing of Conway's rules.
 
 ---
 
