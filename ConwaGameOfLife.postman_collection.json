@@ -1,0 +1,269 @@
+{
+	"info": {
+		"_postman_id": "520a0e13-306f-4152-8b0c-3662a96167b7",
+		"name": "nearsure",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1608233"
+	},
+	"item": [
+		{
+			"name": "01 uploadboard - all false",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"width\": 5,\r\n    \"height\": 5,\r\n    \"cells\": [\r\n        [\r\n            false,\r\n            false,\r\n            false,\r\n            false,\r\n            false\r\n        ],\r\n        [\r\n            false,\r\n            false,\r\n            false,\r\n            false,\r\n            false\r\n        ],\r\n        [\r\n            false,\r\n            false,\r\n            false,\r\n            false,\r\n            false\r\n        ],\r\n        [\r\n            false,\r\n            false,\r\n            false,\r\n            false,\r\n            false\r\n        ],\r\n        [\r\n            false,\r\n            false,\r\n            false,\r\n            false,\r\n            false\r\n        ]\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7229/api/Board/upload",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7229",
+					"path": [
+						"api",
+						"Board",
+						"upload"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "02 uploadboard - square",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"width\": 4,\r\n    \"height\": 4,\r\n    \"cells\": [\r\n        [\r\n            false,\r\n            false,\r\n            false,\r\n            false\r\n        ],\r\n        [\r\n            false,\r\n            true,\r\n            true,\r\n            false\r\n        ],\r\n        [\r\n            false,\r\n            true,\r\n            true,\r\n            false\r\n        ],\r\n        [\r\n            false,\r\n            false,\r\n            false,\r\n            false\r\n        ]\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7229/api/Board/upload",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7229",
+					"path": [
+						"api",
+						"Board",
+						"upload"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "03 nex step",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"width\": 4,\r\n    \"height\": 4,\r\n    \"cells\": [\r\n        [false, false, false, false],\r\n        [false, true,  true,  false],\r\n        [false, true,  true,  false],\r\n        [false, false, false, false]\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7229/api/Board/6d9baa69-cef9-4df8-ba4f-bc8060c73ef1/next",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7229",
+					"path": [
+						"api",
+						"Board",
+						"6d9baa69-cef9-4df8-ba4f-bc8060c73ef1",
+						"next"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "04 x step",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"width\": 4,\r\n    \"height\": 4,\r\n    \"cells\": [\r\n        [false, false, false, false],\r\n        [false, true,  true,  false],\r\n        [false, true,  true,  false],\r\n        [false, false, false, false]\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7229/api/Board/29bc148a-9020-4efc-9c73-e1a244560d5f/steps/10",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7229",
+					"path": [
+						"api",
+						"Board",
+						"29bc148a-9020-4efc-9c73-e1a244560d5f",
+						"steps",
+						"10"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "05 getfinal valid attempts",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"width\": 4,\r\n    \"height\": 4,\r\n    \"cells\": [\r\n        [false, false, false, false],\r\n        [false, true,  true,  false],\r\n        [false, true,  true,  false],\r\n        [false, false, false, false]\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7229/api/Board/29bc148a-9020-4efc-9c73-e1a244560d5f/final/10",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7229",
+					"path": [
+						"api",
+						"Board",
+						"29bc148a-9020-4efc-9c73-e1a244560d5f",
+						"final",
+						"10"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "06 upload - six by six",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"width\": 6,\r\n  \"height\": 6,\r\n  \"cells\": [\r\n    [false, false, false, false, false, false],\r\n    [false, true,  true,  true,  false, false],\r\n    [false, true,  false, false, true,  false],\r\n    [false, false, true,  false, false, false],\r\n    [false, false, false, false, false, false],\r\n    [false, false, false, false, false, false]\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7229/api/Board/upload",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7229",
+					"path": [
+						"api",
+						"Board",
+						"upload"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "07 get the error about attempts",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"width\": 4,\r\n    \"height\": 4,\r\n    \"cells\": [\r\n        [false, false, false, false],\r\n        [false, true,  true,  false],\r\n        [false, true,  true,  false],\r\n        [false, false, false, false]\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7229/api/Board/2b055c08-d473-4827-b316-6ad0fedb345d/final/5",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7229",
+					"path": [
+						"api",
+						"Board",
+						"2b055c08-d473-4827-b316-6ad0fedb345d",
+						"final",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "07 upload - docker - square",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"width\": 4,\r\n    \"height\": 4,\r\n    \"cells\": [\r\n        [\r\n            false,\r\n            false,\r\n            false,\r\n            false\r\n        ],\r\n        [\r\n            false,\r\n            true,\r\n            true,\r\n            false\r\n        ],\r\n        [\r\n            false,\r\n            true,\r\n            true,\r\n            false\r\n        ],\r\n        [\r\n            false,\r\n            false,\r\n            false,\r\n            false\r\n        ]\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/Board/upload",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"Board",
+						"upload"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
